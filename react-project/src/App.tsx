@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Form from "./Form";
+import MovieList from "./MovieList";
+import FunctionButtons from "./FunctionButtons";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Movie {
+  name: string;
+  grade: string;
 }
 
-export default App
+function App() {
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const addMovie = (name: string, grade: string) => {
+    setMovies((movie) => [...movie, { name, grade }]);
+  };
+
+  const removeMovie = (index: number) => {
+    setMovies((movie) => movie.filter((movie, i) => i !== index));
+  };
+
+  const alphabetOrderMovies = () => {
+    setMovies((movies) =>
+      [...movies].sort((a, b) => a.name.localeCompare(b.name))
+    );
+  };
+
+  const gradeOrderMovies = () => {
+    setMovies((movies) =>
+      [...movies].sort((a, b) => parseInt(b.grade) - parseInt(a.grade))
+    );
+  };
+
+  return (
+    <div className="container">
+      <h1>Min filmlista</h1>
+
+      <Form onAddMovie={addMovie} />
+
+      <hr />
+      <h2>Filmer</h2>
+
+      <ul id="movies">
+        {movies.map((movie, i) => (
+          <MovieList
+            name={movie.name}
+            grade={movie.grade}
+            onClose={() => removeMovie(i)}
+          />
+        ))}
+      </ul>
+      <FunctionButtons
+        onClickAlphabet={alphabetOrderMovies}
+        onClickGrade={gradeOrderMovies}
+      />
+    </div>
+  );
+}
+
+export default App;
