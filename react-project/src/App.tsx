@@ -31,6 +31,11 @@ function App() {
     );
   };
 
+  const buttons = [
+    { label: "Alfabetisk ordning", onClick: alphabetOrderMovies },
+    { label: "Betygsordning", onClick: gradeOrderMovies },
+  ];
+
   return (
     <div className="container">
       <h1>Min filmlista</h1>
@@ -49,10 +54,7 @@ function App() {
           />
         ))}
       </ul>
-      <FunctionButtons
-        onClickAlphabet={alphabetOrderMovies}
-        onClickGrade={gradeOrderMovies}
-      />
+      <FunctionButtons buttons={buttons} />
     </div>
   );
 }

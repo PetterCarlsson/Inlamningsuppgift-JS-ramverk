@@ -1,22 +1,17 @@
+import type Button from "./Button";
+
 interface FunctionButtonsProps {
-  onClickAlphabet: () => void;
-  onClickGrade: () => void;
+  buttons: Button[];
 }
 
-export const FunctionButtons = ({
-  onClickAlphabet,
-  onClickGrade,
-}: FunctionButtonsProps) => {
-  return (
-    <>
-      <button className="btn btn-primary mt-3  me-1" onClick={onClickAlphabet}>
-        Alfabetisk ordning
+export const FunctionButtons = ({ buttons }: FunctionButtonsProps) => (
+  <>
+    {buttons.map((btn) => (
+      <button className="btn btn-primary mt-3 me-1" onClick={btn.onClick}>
+        {btn.label}
       </button>
-      <button className="btn btn-primary mt-3" onClick={onClickGrade}>
-        Betygsordning
-      </button>
-    </>
-  );
-};
+    ))}
+  </>
+);
 
 export default FunctionButtons;
