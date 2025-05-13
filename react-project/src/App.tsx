@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Form from "./Form";
-import MovieList from "./MovieList";
-import FunctionButtons from "./FunctionButtons";
+import Form from "./componennts/MovieForm/MovieForm";
+import MovieList from "./componennts/MovieList/MovieList";
+import FunctionButtons from "./componennts/FunctionButtons/FunctionButtons";
 
 interface Movie {
   name: string;

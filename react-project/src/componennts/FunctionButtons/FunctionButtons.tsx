@@ -1,4 +1,7 @@
-import type Button from "./Button";
+interface Button {
+  label: string;
+  onClick: () => void;
+}
 
 interface FunctionButtonsProps {
   buttons: Button[];
